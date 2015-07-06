@@ -1,0 +1,24 @@
+{
+	"comment":[
+		"Introduce",
+		"the",
+		"file."
+	],
+	"task_metadata":{
+		"name":"name",
+		"detail":[
+			"Describe task",
+			"in detail"
+		],
+		"status":"status, default is \"not done\"",
+		"note":"Anything about resolution."
+	},
+	"tasks":[
+		{
+			"name":"dummy",
+			"detail":[ "" ],
+			"status":"done",
+			"note":"this is only here to make adding new tasks easier"
+		}
+	]
+}

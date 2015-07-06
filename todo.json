@@ -1,0 +1,25 @@
+{
+	"tasks":[
+		{
+			"name":"Add a 'hide until <DATE>' option",
+			"detail":[
+				"some stuff I don't want to show for a while"
+			],
+			"status":"not done"
+		},
+		{
+			"name":"Add a prioritisation handling",
+			"detail":[
+				"Take it out of status, for a start. Add Hard Deadlines. Priority numbering?"
+			],
+			"status":"not done"
+		},
+		{
+			"name":"Add an id system for permanent reference.",
+			"detail":[
+				""
+			],
+			"status":"not done"
+		}
+	]
+}

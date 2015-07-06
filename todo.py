@@ -5,17 +5,19 @@ import sys
 import todo_py
 
 script_name = sys.argv[0]
-args = sys.argv[1:]
+args = sys.argv
 arg_count = len(args)
 usage = (
 	"USAGE FOR \"{script_name}\"\n\n"
 	"{script_name} <path> \n\tQuick list\n\n"
-	"{script_name} <path> s NUM\n\t[S]how verbose task.\n\n"
+	"{script_name} <path> e TASK_ID\n\t[E]dit task.\n\n"
+	"{script_name} <path> n\n\t[N]ew task.\n\n"
+	"{script_name} <path> s TASK_ID\n\t[S]how verbose task.\n\n"
 	"{script_name} <path> u\n\tVerbose list of [U]rgent tasks.\n\n"
 	"{script_name} <path> v\n\t[V]erbose list.\n\n"
 ).format(script_name=script_name)
 
-if arg_count == 0:
+if arg_count == 1:
 	print usage
 	sys.exit(1)
 else:
