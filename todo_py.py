@@ -172,6 +172,7 @@ def edit_task(task_list,args):
 	task_list[task_to_edit_index] = editor_task(
 		json.dumps(
 			task_list[task_to_edit_index],
+			sort_keys=True,
 			indent=2,
 			separators=(',', ': ')))
 
@@ -185,6 +186,7 @@ def save_task_list(task_list,path):
 	with open(path,"w") as file:
 		file.write(json.dumps(
 			task_list,
+			sort_keys=True,
 			indent=2,
 			separators=(',', ': ')))
 
