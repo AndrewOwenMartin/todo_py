@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import datetime
 import json
 import os
-import uuid
 import textedit
+import uuid
 
 
 def load_tasks(task_list_file_name):
@@ -30,15 +31,31 @@ urgent_statuses = [
 
 default_status = "not done"
 
+dt_format_str = "%d/%m/%Y - %H:%M:%S"
+
+def get_now_datetime():
+	return datetime.datetime.now()
+
+def get_now_date():
+	return datetime.date.today()
+
+def datetime_to_dt_str(dt):
+	return dt.strftime(dt_format_str)
+
+def dt_str_to_datetime(dt_str):
+	return datetime.datetime.strptime(dt_str,dt_format_str)
+
 task_template = (''
-'{\n'
+'{{\n'
 '	"name": "",\n'
 '	"detail": [\n'
 '		""\n'
 '	],\n'
 '	"status": "not done",\n'
-'	"note": ""\n'
-'}\n')
+'	"note": "",\n'
+'	"hide": "{now}"\n'
+'}}\n').format(
+	now = datetime_to_dt_str(get_now_date()))
 
 def get_field(task,field):
 	if field in task:
@@ -47,6 +64,13 @@ def get_field(task,field):
 		raise KeyError('Task {task_id} missing a "{field}" field'.format(
 			task_id=task["id"][:8],
 			field=field))
+
+def task_hide(task):
+	# Hide task returns true if the task has a hide field, and the hide field
+	# encodes a time later (greater) than now.
+	return (
+		'hide' in task
+		and dt_str_to_datetime(task['hide']) > get_now_datetime())
 
 def task_incomplete(task):
 	return (
@@ -61,7 +85,7 @@ def task_urgent(task):
 def quick_list(task_list):
 	out_lines = []
 	for task in task_list:
-		if task_incomplete(task):
+		if task_incomplete(task) and not task_hide(task):
 			task_id = task["id"]
 			task_info = [get_field(task,'name')]
 			#name = get_field(task,'name')
